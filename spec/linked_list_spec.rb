@@ -248,24 +248,22 @@ RSpec.describe LinkedList do
     it 'removes 2 element' do
       @linked_list.pop
       @linked_list.pop
-      expect(@linked_list.to_string)
-      .to eq("#{data_1} #{data_2}")
+      expect(@linked_list.to_string).to eq("#{data_1} #{data_2}")
     end
 
     it 'removes 3 element' do
       @linked_list.pop
       @linked_list.pop
       @linked_list.pop
-      expect(@linked_list.to_string)
-      .to eq("#{data_1}")
+      expect(@linked_list.to_string).to eq("#{data_1}")
     end
 
     it 'does nothing when used on an empty linked list' do
       linked_list = LinkedList.new
-      expect(@linked_list.to_string).to eq('')
+      expect(linked_list.to_string).to eq('')
 
       linked_list.pop
-      expect(@linked_list.to_string).to eq('')
+      expect(linked_list.to_string).to eq('')
     end
   end
 end
