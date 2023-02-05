@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../lib/linked_list'
-require_relative '../lib/node'
+require './lib/linked_list'
+require './lib/node'
 
 RSpec.describe LinkedList do
   data_1 = 'plop'
@@ -58,7 +58,6 @@ RSpec.describe LinkedList do
       expect(@linked_list.head.next_node.next_node.next_node).to eq(nil)
       expect(@linked_list.to_string).to eq("#{data_1} #{data_2} #{data_3}")
     end
-
   end
 
   describe '#count' do
@@ -201,7 +200,6 @@ RSpec.describe LinkedList do
     it 'returns nil if the number of elements is less than or equal to 0' do
       expect(@linked_list.find(1, 0)).to eq(nil)
     end
-
   end
 
   describe '#includes?' do
