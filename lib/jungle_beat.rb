@@ -23,4 +23,11 @@ class JungleBeat
     end
     count
   end
+
+  def play
+    command = 'say -r 500 -v Boing'
+    beats = @list.to_string
+    `#{command} #{beats}`
+    "#{command} #{beats}"
+  end
 end
