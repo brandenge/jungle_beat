@@ -1,3 +1,5 @@
+require './lib/node'
+
 class LinkedList
   attr_accessor :head
 
@@ -16,7 +18,7 @@ class LinkedList
       current = current.next_node
     end
     current.next_node = node
-    return node
+    node
   end
 
   def count
@@ -40,5 +42,63 @@ class LinkedList
       current = current.next_node
     end
     string
+  end
+
+  def prepend(data)
+    node = Node.new(data)
+    node.next_node = @head if @head != nil
+    @head = node
+  end
+
+  def insert(index, data)
+    if index == 0
+      prepend(data)
+      return
+    end
+    current = @head
+    (index - 1).times do
+      current = current.next_node
+    end
+    node = Node.new(data)
+    node.next_node = current.next_node
+    current.next_node = node
+  end
+
+  def find(index, count)
+    return if count <= 0 || index < 0
+    current = @head
+    index.times do
+      current = current.next_node
+    end
+    found = current.data.to_s
+    (count - 1).times do
+      current = current.next_node
+      found += " #{current.data.to_s}"
+    end
+    found
+  end
+
+  def includes?(data)
+    included = false
+    current = @head
+    while current != nil
+      if current.data == data
+        included = true
+        break
+      end
+      current = current.next_node
+    end
+    included
+  end
+
+  def pop
+    current = @head
+    popped_node = nil
+    while current&.next_node&.next_node != nil
+      current = current.next_node
+    end
+    popped_node = current&.next_node
+    current&.next_node = nil
+    popped_node
   end
 end

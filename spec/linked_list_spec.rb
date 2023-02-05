@@ -6,6 +6,7 @@ RSpec.describe LinkedList do
   data_1 = 'plop'
   data_2 = 'doop'
   data_3 = 'deep'
+  data_4 = 'woo'
 
   before(:each) do
     @linked_list = LinkedList.new
@@ -14,6 +15,10 @@ RSpec.describe LinkedList do
   describe '#initialize' do
     it 'exists' do
       expect(@linked_list).to be_a(LinkedList)
+    end
+
+    it 'initialized head correctly to equal nil' do
+      expect(@linked_list.head).to eq(nil)
     end
   end
 
@@ -24,6 +29,7 @@ RSpec.describe LinkedList do
       expect(@linked_list.head).to be(node)
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_1}")
     end
 
     it 'appends 2 nodes' do
@@ -32,10 +38,10 @@ RSpec.describe LinkedList do
 
       expect(@linked_list.head).to be(node_1)
       expect(@linked_list.head.next_node).to be(node_2)
-
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node.data).to eq(data_2)
       expect(@linked_list.head.next_node.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_1} #{data_2}")
     end
 
     it 'appends 3 nodes' do
@@ -46,11 +52,11 @@ RSpec.describe LinkedList do
       expect(@linked_list.head).to be(node_1)
       expect(@linked_list.head.next_node).to be(node_2)
       expect(@linked_list.head.next_node.next_node).to be(node_3)
-
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node.data).to eq(data_2)
       expect(@linked_list.head.next_node.next_node.data).to eq(data_3)
       expect(@linked_list.head.next_node.next_node.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_1} #{data_2} #{data_3}")
     end
 
   end
@@ -103,6 +109,161 @@ RSpec.describe LinkedList do
       @linked_list.append(data_2)
       @linked_list.append(data_3)
       expect(@linked_list.to_string).to eq("#{data_1} #{data_2} #{data_3}")
+    end
+  end
+
+  describe '#prepend' do
+    it 'prepends 1 node' do
+      node = @linked_list.prepend(data_1)
+
+      expect(@linked_list.head).to be(node)
+      expect(@linked_list.head.data).to eq(data_1)
+      expect(@linked_list.head.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_1}")
+    end
+
+    it 'prepends 2 nodes' do
+      node_1 = @linked_list.prepend(data_1)
+      node_2 = @linked_list.prepend(data_2)
+
+      expect(@linked_list.head).to be(node_2)
+      expect(@linked_list.head.next_node).to be(node_1)
+      expect(@linked_list.head.data).to eq(data_2)
+      expect(@linked_list.head.next_node.data).to eq(data_1)
+      expect(@linked_list.head.next_node.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_2} #{data_1}")
+    end
+
+    it 'prepends 3 nodes' do
+      node_1 = @linked_list.prepend(data_1)
+      node_2 = @linked_list.prepend(data_2)
+      node_3 = @linked_list.prepend(data_3)
+
+      expect(@linked_list.head).to be(node_3)
+      expect(@linked_list.head.next_node).to be(node_2)
+      expect(@linked_list.head.next_node.next_node).to be(node_1)
+
+      expect(@linked_list.head.data).to eq(data_3)
+      expect(@linked_list.head.next_node.data).to eq(data_2)
+      expect(@linked_list.head.next_node.next_node.data).to eq(data_1)
+      expect(@linked_list.head.next_node.next_node.next_node).to eq(nil)
+      expect(@linked_list.to_string).to eq("#{data_3} #{data_2} #{data_1}")
+    end
+  end
+
+  describe '#insert' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+    end
+
+    it 'inserts at the start of a list' do
+      @linked_list.insert(0, data_4)
+      expect(@linked_list.to_string)
+      .to eq("#{data_4} #{data_1} #{data_2} #{data_3}")
+    end
+
+    it 'inserts at the end of a list' do
+      @linked_list.insert(3, data_4)
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_3} #{data_4}")
+    end
+
+    it 'inserts in the midddle of a list' do
+      @linked_list.insert(2, data_4)
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_4} #{data_3}")
+    end
+  end
+
+  describe '#find' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
+
+    it 'finds the first 4 elements' do
+      expect(@linked_list.find(0, 4))
+      .to eq("#{data_1} #{data_2} #{data_3} #{data_4}")
+    end
+
+    it 'finds the 2nd and 3rd elements' do
+      expect(@linked_list.find(1, 2)).to eq("#{data_2} #{data_3}")
+    end
+
+    it 'returns nil if the index given is a negative number' do
+      expect(@linked_list.find(-1, 2)).to eq(nil)
+    end
+
+    it 'returns nil if the number of elements is less than or equal to 0' do
+      expect(@linked_list.find(1, 0)).to eq(nil)
+    end
+
+  end
+
+  describe '#includes?' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
+
+    it 'returns true when the data is included' do
+      expect(@linked_list.includes?(data_1)).to eq(true)
+      expect(@linked_list.includes?(data_2)).to eq(true)
+      expect(@linked_list.includes?(data_3)).to eq(true)
+      expect(@linked_list.includes?(data_4)).to eq(true)
+    end
+
+    it 'returns false when the data is not included' do
+      expect(@linked_list.includes?('h9$!61Yf2BXvGZjM0q5AvCz7Igk')).to eq(false)
+      expect(@linked_list.includes?('')).to eq(false)
+      expect(@linked_list.includes?(nil)).to eq(false)
+      expect(@linked_list.includes?('dep')).to eq(false)
+    end
+  end
+
+  describe '#pop' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
+
+    it 'removes 1 element' do
+      @linked_list.pop
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_3}")
+    end
+
+    it 'returns the popped node' do
+      expect(@linked_list.pop).to be_a(Node)
+    end
+
+    it 'removes 2 element' do
+      @linked_list.pop
+      @linked_list.pop
+      expect(@linked_list.to_string).to eq("#{data_1} #{data_2}")
+    end
+
+    it 'removes 3 element' do
+      @linked_list.pop
+      @linked_list.pop
+      @linked_list.pop
+      expect(@linked_list.to_string).to eq("#{data_1}")
+    end
+
+    it 'does nothing when used on an empty linked list' do
+      linked_list = LinkedList.new
+      expect(linked_list.to_string).to eq('')
+
+      linked_list.pop
+      expect(linked_list.to_string).to eq('')
     end
   end
 end
