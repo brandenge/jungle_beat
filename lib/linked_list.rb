@@ -1,3 +1,5 @@
+require './lib/node'
+
 class LinkedList
   attr_accessor :head
 
@@ -16,7 +18,7 @@ class LinkedList
       current = current.next_node
     end
     current.next_node = node
-    return node
+    node
   end
 
   def count
@@ -40,5 +42,11 @@ class LinkedList
       current = current.next_node
     end
     string
+  end
+
+  def prepend(data)
+    node = Node.new(data)
+    node.next_node = @head if @head != nil
+    @head = node
   end
 end
