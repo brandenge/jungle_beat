@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../lib/node'
+require './lib/node'
 
 RSpec.describe Node do
   before(:each) do

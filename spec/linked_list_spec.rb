@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../lib/linked_list'
-require_relative '../lib/node'
+require './lib/linked_list'
+require './lib/node'
 
 RSpec.describe LinkedList do
   data_1 = 'plop'
