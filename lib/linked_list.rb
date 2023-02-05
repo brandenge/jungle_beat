@@ -63,4 +63,18 @@ class LinkedList
     node.next_node = current.next_node
     current.next_node = node
   end
+
+  def find(index, count)
+    return if count <= 0 || index < 0
+    current = @head
+    index.times do
+      current = current.next_node
+    end
+    found = current.data.to_s
+    (count - 1).times do
+      current = current.next_node
+      found += " #{current.data.to_s}"
+    end
+    found
+  end
 end
