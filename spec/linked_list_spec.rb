@@ -200,11 +200,30 @@ RSpec.describe LinkedList do
 
   end
 
-  describe '#pop' do
+  describe '#includes?' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
 
+    it 'returns true when the data is included' do
+      expect(linked_list.includes?(data_1)).to eq(true)
+      expect(linked_list.includes?(data_2)).to eq(true)
+      expect(linked_list.includes?(data_3)).to eq(true)
+      expect(linked_list.includes?(data_4)).to eq(true)
+    end
+
+    it 'returns false when the data is not included' do
+      expect(linked_list.includes?('h9$!61Yf2BQXvGZjM0q5AvCz7Igk')).to eq(false)
+      expect(linked_list.includes?('')).to eq(false)
+      expect(linked_list.includes?(nil)).to eq(false)
+      expect(linked_list.includes?('dep')).to eq(false)
+    end
   end
 
-  describe '#includes?' do
+  describe '#pop' do
 
   end
 end
