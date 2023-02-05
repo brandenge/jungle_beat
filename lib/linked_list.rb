@@ -90,4 +90,15 @@ class LinkedList
     end
     included
   end
+
+  def pop
+    current = @head
+    popped_node = nil
+    while current&.next_node&.next_node != nil
+      current = current.next_node
+    end
+    popped_node = current&.next_node
+    current&.next_node = nil
+    popped_node
+  end
 end
