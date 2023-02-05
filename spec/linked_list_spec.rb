@@ -105,4 +105,57 @@ RSpec.describe LinkedList do
       expect(@linked_list.to_string).to eq("#{data_1} #{data_2} #{data_3}")
     end
   end
+
+  describe '#prepend' do
+    it 'prepends 1 node' do
+      node = @linked_list.prepend(data_1)
+
+      expect(@linked_list.head).to be(node)
+      expect(@linked_list.head.data).to eq(data_1)
+      expect(@linked_list.head.next_node).to eq(nil)
+    end
+
+    it 'prepends 2 nodes' do
+      node_1 = @linked_list.prepend(data_1)
+      node_2 = @linked_list.prepend(data_2)
+
+      expect(@linked_list.head).to be(node_2)
+      expect(@linked_list.head.next_node).to be(node_1)
+
+      expect(@linked_list.head.data).to eq(data_2)
+      expect(@linked_list.head.next_node.data).to eq(data_1)
+      expect(@linked_list.head.next_node.next_node).to eq(nil)
+    end
+
+    it 'prepends 3 nodes' do
+      node_1 = @linked_list.prepend(data_1)
+      node_2 = @linked_list.prepend(data_2)
+      node_3 = @linked_list.prepend(data_3)
+
+      expect(@linked_list.head).to be(node_3)
+      expect(@linked_list.head.next_node).to be(node_2)
+      expect(@linked_list.head.next_node.next_node).to be(node_1)
+
+      expect(@linked_list.head.data).to eq(data_3)
+      expect(@linked_list.head.next_node.data).to eq(data_2)
+      expect(@linked_list.head.next_node.next_node.data).to eq(data_1)
+      expect(@linked_list.head.next_node.next_node.next_node).to eq(nil)
+    end
+  end
+
+  describe '#insert' do
+
+  end
+
+  describe '#find' do
+
+  end
+
+  describe '#pop' do
+
+  end
+
+  describe '#includes?' do
+
+  end
 end
