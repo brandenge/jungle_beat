@@ -6,6 +6,7 @@ RSpec.describe LinkedList do
   data_1 = 'plop'
   data_2 = 'doop'
   data_3 = 'deep'
+  data_4 = 'woo'
 
   before(:each) do
     @linked_list = LinkedList.new
@@ -145,6 +146,29 @@ RSpec.describe LinkedList do
 
   describe '#insert' do
 
+    before(:each) do
+      @node_1 = @linked_list.append(data_1)
+      @node_2 = @linked_list.append(data_2)
+      @node_3 = @linked_list.append(data_3)
+    end
+
+    it 'inserts at the start of a list' do
+      @linked_list.insert(0, @data)
+      expect(@linked_list.to_string)
+      .to eq("#{data_4} #{data_1} #{data_2} #{data_3}")
+    end
+
+    it 'inserts at the end of a list' do
+      @linked_list.insert(3, @data)
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_3} #{data_4}")
+    end
+
+    it 'inserts in the midddle of a list' do
+      @linked_list.insert(2, @data)
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_4} #{data_3}")
+    end
   end
 
   describe '#find' do
