@@ -153,19 +153,19 @@ RSpec.describe LinkedList do
     end
 
     it 'inserts at the start of a list' do
-      @linked_list.insert(0, @data)
+      @linked_list.insert(0, data_4)
       expect(@linked_list.to_string)
       .to eq("#{data_4} #{data_1} #{data_2} #{data_3}")
     end
 
     it 'inserts at the end of a list' do
-      @linked_list.insert(3, @data)
+      @linked_list.insert(3, data_4)
       expect(@linked_list.to_string)
       .to eq("#{data_1} #{data_2} #{data_3} #{data_4}")
     end
 
     it 'inserts in the midddle of a list' do
-      @linked_list.insert(2, @data)
+      @linked_list.insert(2, data_4)
       expect(@linked_list.to_string)
       .to eq("#{data_1} #{data_2} #{data_4} #{data_3}")
     end
