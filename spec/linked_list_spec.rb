@@ -145,11 +145,10 @@ RSpec.describe LinkedList do
   end
 
   describe '#insert' do
-
     before(:each) do
-      @node_1 = @linked_list.append(data_1)
-      @node_2 = @linked_list.append(data_2)
-      @node_3 = @linked_list.append(data_3)
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
     end
 
     it 'inserts at the start of a list' do
@@ -172,6 +171,29 @@ RSpec.describe LinkedList do
   end
 
   describe '#find' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
+
+    it 'finds the first 4 elements' do
+      expect(@linked_list.find(0, 4))
+      .to eq("#{data_1} #{data_2} #{data_3} #{data_4}")
+    end
+
+    it 'finds the 2nd and 3rd elements' do
+      expect(@linked_list.find(1, 2)).to eq("#{data_2} #{data_3}")
+    end
+
+    it 'returns nil if the index given is a negative number' do
+      expect(@linked_list.find(-1, 2)).to eq(nil)
+    end
+
+    it 'returns nil if the number of elements is less than or equal to 0' do
+      expect(@linked_list.find(1, 0)).to eq(nil)
+    end
 
   end
 
