@@ -16,6 +16,10 @@ RSpec.describe LinkedList do
     it 'exists' do
       expect(@linked_list).to be_a(LinkedList)
     end
+
+    it 'initialized head correctly to equal nil' do
+      expect(@linked_list.head).to eq(nil)
+    end
   end
 
   describe '#append' do
@@ -224,6 +228,44 @@ RSpec.describe LinkedList do
   end
 
   describe '#pop' do
+    before(:each) do
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
+      @linked_list.append(data_4)
+    end
 
+    it 'removes 1 element' do
+      @linked_list.pop
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2} #{data_3}")
+    end
+
+    it 'returns the popped node' do
+      expect(@linked_list.pop).to be_a(Node)
+    end
+
+    it 'removes 2 element' do
+      @linked_list.pop
+      @linked_list.pop
+      expect(@linked_list.to_string)
+      .to eq("#{data_1} #{data_2}")
+    end
+
+    it 'removes 3 element' do
+      @linked_list.pop
+      @linked_list.pop
+      @linked_list.pop
+      expect(@linked_list.to_string)
+      .to eq("#{data_1}")
+    end
+
+    it 'does nothing when used on an empty linked list' do
+      linked_list = LinkedList.new
+      expect(@linked_list.to_string).to eq('')
+
+      linked_list.pop
+      expect(@linked_list.to_string).to eq('')
+    end
   end
 end
