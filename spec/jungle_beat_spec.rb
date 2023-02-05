@@ -61,4 +61,20 @@ RSpec.describe JungleBeat do
       expect(@jb.count).to eq(6)
     end
   end
+
+  describe '#play' do
+    it 'returns the correct command' do
+      command = 'say -r 500 -v Boing'
+      beats = 'deep doo ditt'
+      @jb.append(beats)
+      expect(@jb.play).to eq("#{command} #{beats}")
+    end
+
+    it 'returns the correct command again with different beats' do
+      command = 'say -r 500 -v Boing'
+      beats = 'woo hoo shu'
+      @jb.append(beats)
+      expect(@jb.play).to eq("#{command} #{beats}")
+    end
+  end
 end
