@@ -36,6 +36,29 @@ RSpec.describe JungleBeat do
   end
 
   describe '#count' do
+    it 'has a count of 0 when its list is empty' do
+      expect(@jb.count).to eq(0)
+    end
 
+    it 'has a count of 1 when its list has 1 node' do
+      @jb.append('deep')
+      expect(@jb.count).to eq(1)
+    end
+
+    it 'has a count of 2 when its list has 2 nodes' do
+      @jb.append('deep doo')
+      expect(@jb.count).to eq(2)
+    end
+
+    it 'has a count of 3 when its list has 3 nodes' do
+      @jb.append('deep doo ditt')
+      expect(@jb.count).to eq(3)
+    end
+
+    it 'has a count of 6 when its list has 6 nodes' do
+      @jb.append('deep doo ditt')
+      @jb.append('woo hoo shu')
+      expect(@jb.count).to eq(6)
+    end
   end
 end
