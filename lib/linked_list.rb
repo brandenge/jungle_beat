@@ -77,4 +77,17 @@ class LinkedList
     end
     found
   end
+
+  def includes?(data)
+    included = false
+    current = @head
+    while current != nil
+      if current.data == data
+        included = true
+        break
+      end
+      current = current.next_node
+    end
+    included
+  end
 end
