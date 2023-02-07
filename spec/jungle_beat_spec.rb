@@ -86,4 +86,16 @@ RSpec.describe JungleBeat do
       expect(@jb.play).to eq(3)
     end
   end
+
+  describe '#all' do
+    it "returns a string of the nodes' data in the list" do
+      @jb.append('deep doo ditt')
+      expect(@jb.all).to eq(@jb.list.to_string)
+    end
+
+    it "returns a different string of the nodes' data in the list" do
+      @jb.append('woo hoo shu')
+      expect(@jb.all).to eq(@jb.list.to_string)
+    end
+  end
 end
