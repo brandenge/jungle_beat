@@ -153,22 +153,56 @@ RSpec.describe JungleBeat do
   end
 
   describe '#reset_rate' do
-    it 'resets the rate from 100' do
+    it 'resets the rate' do
       @jb.rate = 100
       expect(@jb.rate).to eq(100)
       @jb.reset_rate
       expect(@jb.rate).to eq(500)
     end
 
-    it 'resets the rate from 300' do
+    it 'resets the rate again' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
       @jb.rate = 300
       expect(@jb.rate).to eq(300)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
+
+    it 'resetting the rate multiple times has no effect' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
       @jb.reset_rate
       expect(@jb.rate).to eq(500)
     end
   end
 
   describe '#reset_voice' do
+    it 'resets the voice' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+    end
 
+    it 'resets the voice again' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.voice = 'Tom'
+      expect(@jb.voice).to eq('Tom')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+    end
+
+    it 'resetting the rate multiple times has no effect' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+    end
   end
 end
