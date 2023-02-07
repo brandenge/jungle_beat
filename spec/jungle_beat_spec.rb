@@ -13,14 +13,35 @@ RSpec.describe JungleBeat do
       expect(@jb).to be_a(JungleBeat)
     end
 
-    it 'is initialized correctly' do
+    it 'initializes @list to an empty LinkedList' do
       expect(@jb.list).to be_a(LinkedList)
       expect(@jb.list.head).to eq(nil)
+    end
+
+    it 'initializes @rate to 500' do
+      expect(@jb.rate).to eq(500)
+    end
+
+    it 'initializes @voice to "Boing"' do
+      expect(@jb.voice).to eq('Boing')
     end
   end
 
   describe '#append' do
-    it 'appends 3 elements correctly' do
+    it 'appends 1 beat at once' do
+      @jb.append('deep')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node).to eq(nil)
+    end
+
+    it 'appends 2 beats at once' do
+      @jb.append('deep doo')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node.data).to eq('doo')
+      expect(@jb.list.head.next_node.next_node).to eq(nil)
+    end
+
+    it 'appends 3 beats at once' do
       @jb.append('deep doo ditt')
       expect(@jb.list.head.data).to eq('deep')
       expect(@jb.list.head.next_node.data).to eq('doo')
@@ -28,7 +49,7 @@ RSpec.describe JungleBeat do
       expect(@jb.list.to_string).to eq('deep doo ditt')
     end
 
-    it 'appends an additional 3 elements correctly' do
+    it 'appends an additional 3 beats' do
       @jb.append('deep doo ditt')
       @jb.append('woo hoo shu')
       expect(@jb.list.to_string).to eq('deep doo ditt woo hoo shu')
@@ -63,18 +84,125 @@ RSpec.describe JungleBeat do
   end
 
   describe '#play' do
-    it 'returns the correct command' do
-      command = 'say -r 500 -v Boing'
-      beats = 'deep doo ditt'
-      @jb.append(beats)
-      expect(@jb.play).to eq("#{command} #{beats}")
+    it 'returns the count' do
+      @jb.append('deep doo')
+      expect(@jb.play).to eq(2)
     end
 
-    it 'returns the correct command again with different beats' do
-      command = 'say -r 500 -v Boing'
-      beats = 'woo hoo shu'
-      @jb.append(beats)
-      expect(@jb.play).to eq("#{command} #{beats}")
+    it 'returns a different count' do
+      @jb.append('woo hoo shu')
+      expect(@jb.play).to eq(3)
+    end
+  end
+
+  describe '#all' do
+    it "returns a string of the nodes' data in the list" do
+      @jb.append('deep doo ditt')
+      expect(@jb.all).to eq(@jb.list.to_string)
+    end
+
+    it "returns a different string of the nodes' data in the list" do
+      @jb.append('woo hoo shu')
+      expect(@jb.all).to eq(@jb.list.to_string)
+    end
+  end
+
+  describe '#prepend' do
+    it 'prepends 1 beat at once' do
+      @jb.prepend('deep')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep')
+    end
+
+    it 'prepends 2 beats at once' do
+      @jb.prepend('deep doo')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node.data).to eq('doo')
+      expect(@jb.list.head.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo')
+    end
+
+    it 'prepends 3 beats at once' do
+      @jb.prepend('deep doo ditt')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node.data).to eq('doo')
+      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
+      expect(@jb.list.head.next_node.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo ditt')
+    end
+
+    it 'prepends 1 beat 2 times' do
+      @jb.prepend('deep')
+      @jb.prepend('doo')
+      expect(@jb.all).to eq('doo deep')
+    end
+
+    it 'prepends 1 beat 3 times' do
+      @jb.prepend('deep')
+      @jb.prepend('doo')
+      @jb.prepend('ditt')
+      expect(@jb.all).to eq('ditt doo deep')
+    end
+
+    it 'prepends an additional 3 beats' do
+      @jb.prepend('deep doo ditt')
+      @jb.prepend('woo hoo shu')
+      expect(@jb.all).to eq('woo hoo shu deep doo ditt')
+    end
+  end
+
+  describe '#reset_rate' do
+    it 'resets the rate' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
+
+    it 'resets the rate again' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
+      @jb.rate = 300
+      expect(@jb.rate).to eq(300)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
+
+    it 'resetting the rate multiple times has no effect' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
+  end
+
+  describe '#reset_voice' do
+    it 'resets the voice' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+    end
+
+    it 'resets the voice again' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.voice = 'Tom'
+      expect(@jb.voice).to eq('Tom')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+    end
+
+    it 'resetting the rate multiple times has no effect' do
+      @jb.voice = 'Daniel'
+      expect(@jb.voice).to eq('Daniel')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
+      @jb.reset_voice
+      expect(@jb.voice).to eq('Boing')
     end
   end
 end

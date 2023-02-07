@@ -24,20 +24,17 @@ RSpec.describe LinkedList do
 
   describe '#append' do
     it 'appends 1 node' do
-      node = @linked_list.append(data_1)
+      @linked_list.append(data_1)
 
-      expect(@linked_list.head).to be(node)
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node).to eq(nil)
       expect(@linked_list.to_string).to eq("#{data_1}")
     end
 
     it 'appends 2 nodes' do
-      node_1 = @linked_list.append(data_1)
-      node_2 = @linked_list.append(data_2)
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
 
-      expect(@linked_list.head).to be(node_1)
-      expect(@linked_list.head.next_node).to be(node_2)
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node.data).to eq(data_2)
       expect(@linked_list.head.next_node.next_node).to eq(nil)
@@ -45,13 +42,10 @@ RSpec.describe LinkedList do
     end
 
     it 'appends 3 nodes' do
-      node_1 = @linked_list.append(data_1)
-      node_2 = @linked_list.append(data_2)
-      node_3 = @linked_list.append(data_3)
+      @linked_list.append(data_1)
+      @linked_list.append(data_2)
+      @linked_list.append(data_3)
 
-      expect(@linked_list.head).to be(node_1)
-      expect(@linked_list.head.next_node).to be(node_2)
-      expect(@linked_list.head.next_node.next_node).to be(node_3)
       expect(@linked_list.head.data).to eq(data_1)
       expect(@linked_list.head.next_node.data).to eq(data_2)
       expect(@linked_list.head.next_node.next_node.data).to eq(data_3)

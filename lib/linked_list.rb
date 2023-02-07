@@ -11,14 +11,14 @@ class LinkedList
     node = Node.new(data)
     if @head == nil
       @head = node
-      return node
+      return data
     end
     current = @head
     while current.next_node != nil
       current = current.next_node
     end
     current.next_node = node
-    node
+    data
   end
 
   def count
@@ -65,7 +65,7 @@ class LinkedList
   end
 
   def find(index, count)
-    return if count <= 0 || index < 0
+    return if count index < 0 || count <= 0
     current = @head
     index.times do
       current = current.next_node
