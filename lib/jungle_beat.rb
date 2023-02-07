@@ -6,7 +6,7 @@ class JungleBeat
   DEFAULTS = {
     rate: 500,
     voice: 'Boing'
-  }
+  }.freeze
 
   attr_reader :list
   attr_accessor :rate, :voice
