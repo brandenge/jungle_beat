@@ -17,6 +17,14 @@ RSpec.describe JungleBeat do
       expect(@jb.list).to be_a(LinkedList)
       expect(@jb.list.head).to eq(nil)
     end
+
+    it 'initializes @rate to 500' do
+      expect(@jb.rate).to eq(500)
+    end
+
+    it 'initializes @voice to "Boing"' do
+      expect(@jb.voice).to eq('Boing')
+    end
   end
 
   describe '#append' do
@@ -142,5 +150,13 @@ RSpec.describe JungleBeat do
       @jb.prepend('woo hoo shu')
       expect(@jb.all).to eq('woo hoo shu deep doo ditt')
     end
+  end
+
+  describe '#reset_rate' do
+
+  end
+
+  describe '#reset_voice' do
+
   end
 end
