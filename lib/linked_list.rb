@@ -48,6 +48,7 @@ class LinkedList
     node = Node.new(data)
     node.next_node = @head if @head != nil
     @head = node
+    data
   end
 
   def insert(index, data)
@@ -65,7 +66,7 @@ class LinkedList
   end
 
   def find(index, count)
-    return if count index < 0 || count <= 0
+    return if index < 0 || count <= 0
     current = @head
     index.times do
       current = current.next_node

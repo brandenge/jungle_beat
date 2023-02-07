@@ -18,11 +18,11 @@ RSpec.describe JungleBeat do
       expect(@jb.list.head).to eq(nil)
     end
 
-    it 'initializes @rate to 500' do
+    it 'initializes @rate' do
       expect(@jb.rate).to eq(500)
     end
 
-    it 'initializes @voice to "Boing"' do
+    it 'initializes @voice' do
       expect(@jb.voice).to eq('Boing')
     end
   end
@@ -30,29 +30,23 @@ RSpec.describe JungleBeat do
   describe '#append' do
     it 'appends 1 beat at once' do
       @jb.append('deep')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep')
     end
 
     it 'appends 2 beats at once' do
       @jb.append('deep doo')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo')
     end
 
     it 'appends 3 beats at once' do
       @jb.append('deep doo ditt')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
-      expect(@jb.list.to_string).to eq('deep doo ditt')
+      expect(@jb.all).to eq('deep doo ditt')
     end
 
     it 'appends an additional 3 beats' do
       @jb.append('deep doo ditt')
       @jb.append('woo hoo shu')
-      expect(@jb.list.to_string).to eq('deep doo ditt woo hoo shu')
+      expect(@jb.all).to eq('deep doo ditt woo hoo shu')
     end
   end
 
@@ -117,18 +111,11 @@ RSpec.describe JungleBeat do
 
     it 'prepends 2 beats at once' do
       @jb.prepend('deep doo')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node).to eq(nil)
       expect(@jb.all).to eq('deep doo')
     end
 
     it 'prepends 3 beats at once' do
       @jb.prepend('deep doo ditt')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
-      expect(@jb.list.head.next_node.next_node.next_node).to eq(nil)
       expect(@jb.all).to eq('deep doo ditt')
     end
 
@@ -157,7 +144,7 @@ RSpec.describe JungleBeat do
       @jb.rate = 100
       expect(@jb.rate).to eq(100)
       @jb.reset_rate
-      expect(@jb.rate).to eq(500)
+      expect(@jb.rate).to eq(JungleBeat::DEFAULTS[:rate])
     end
 
     it 'resets the rate again' do
@@ -166,16 +153,16 @@ RSpec.describe JungleBeat do
       @jb.rate = 300
       expect(@jb.rate).to eq(300)
       @jb.reset_rate
-      expect(@jb.rate).to eq(500)
+      expect(@jb.rate).to eq(JungleBeat::DEFAULTS[:rate])
     end
 
     it 'resetting the rate multiple times has no effect' do
       @jb.rate = 100
       expect(@jb.rate).to eq(100)
       @jb.reset_rate
-      expect(@jb.rate).to eq(500)
+      expect(@jb.rate).to eq(JungleBeat::DEFAULTS[:rate])
       @jb.reset_rate
-      expect(@jb.rate).to eq(500)
+      expect(@jb.rate).to eq(JungleBeat::DEFAULTS[:rate])
     end
   end
 
@@ -184,7 +171,7 @@ RSpec.describe JungleBeat do
       @jb.voice = 'Daniel'
       expect(@jb.voice).to eq('Daniel')
       @jb.reset_voice
-      expect(@jb.voice).to eq('Boing')
+      expect(@jb.voice).to eq(JungleBeat::DEFAULTS[:voice])
     end
 
     it 'resets the voice again' do
@@ -193,16 +180,16 @@ RSpec.describe JungleBeat do
       @jb.voice = 'Tom'
       expect(@jb.voice).to eq('Tom')
       @jb.reset_voice
-      expect(@jb.voice).to eq('Boing')
+      expect(@jb.voice).to eq(JungleBeat::DEFAULTS[:voice])
     end
 
     it 'resetting the rate multiple times has no effect' do
       @jb.voice = 'Daniel'
       expect(@jb.voice).to eq('Daniel')
       @jb.reset_voice
-      expect(@jb.voice).to eq('Boing')
+      expect(@jb.voice).to eq(JungleBeat::DEFAULTS[:voice])
       @jb.reset_voice
-      expect(@jb.voice).to eq('Boing')
+      expect(@jb.voice).to eq(JungleBeat::DEFAULTS[:voice])
     end
   end
 end

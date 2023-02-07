@@ -12,7 +12,7 @@ RSpec.describe Node do
       expect(@node_1).to be_a(Node)
     end
 
-    it 'still exists' do
+    it 'exists again' do
       expect(@node_2).to be_a(Node)
     end
   end
