@@ -32,7 +32,7 @@ class JungleBeat
   end
 
   def play
-    command = 'say -r 500 -v Boing'
+    command = "say -r #{@rate} -v #{@voice}"
     beats = @list.to_string
     `#{command} #{beats}`
     count

@@ -153,7 +153,19 @@ RSpec.describe JungleBeat do
   end
 
   describe '#reset_rate' do
+    it 'resets the rate from 100' do
+      @jb.rate = 100
+      expect(@jb.rate).to eq(100)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
 
+    it 'resets the rate from 300' do
+      @jb.rate = 300
+      expect(@jb.rate).to eq(300)
+      @jb.reset_rate
+      expect(@jb.rate).to eq(500)
+    end
   end
 
   describe '#reset_voice' do
