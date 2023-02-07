@@ -17,7 +17,7 @@ RSpec.describe LinkedList do
       expect(@linked_list).to be_a(LinkedList)
     end
 
-    it 'initialized head correctly to equal nil' do
+    it 'initializes head to equal nil' do
       expect(@linked_list.head).to eq(nil)
     end
   end

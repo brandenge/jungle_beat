@@ -18,11 +18,11 @@ RSpec.describe JungleBeat do
       expect(@jb.list.head).to eq(nil)
     end
 
-    it 'initializes @rate to 500' do
+    it 'initializes @rate' do
       expect(@jb.rate).to eq(500)
     end
 
-    it 'initializes @voice to "Boing"' do
+    it 'initializes @voice' do
       expect(@jb.voice).to eq('Boing')
     end
   end
