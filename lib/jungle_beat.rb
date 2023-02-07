@@ -3,13 +3,18 @@ require './lib/linked_list'
 class JungleBeat
   BEATS = %w(boop bop dee deep ditt doo doop dop hoo la na plop shi shu suu tee woo).freeze
 
+  DEFAULTS = {
+    rate: 500,
+    voice: 'Boing'
+  }
+
   attr_reader :list
   attr_accessor :rate, :voice
 
   def initialize
     @list = LinkedList.new
-    @rate = 500
-    @voice = 'Boing'
+    @rate = DEFAULTS[:rate]
+    @voice = DEFAULTS[:voice]
   end
 
   def append(string_data)
@@ -52,10 +57,10 @@ class JungleBeat
   end
 
   def reset_rate
-    @rate = 500
+    @rate = DEFAULTS[:rate]
   end
 
   def reset_voice
-    @voice = 'Boing'
+    @voice = DEFAULTS[:voice]
   end
 end
