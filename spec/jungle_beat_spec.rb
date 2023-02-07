@@ -98,4 +98,49 @@ RSpec.describe JungleBeat do
       expect(@jb.all).to eq(@jb.list.to_string)
     end
   end
+
+  describe '#prepend' do
+    it 'prepends 1 beat at once' do
+      @jb.prepend('deep')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep')
+    end
+
+    it 'prepends 2 beats at once' do
+      @jb.prepend('deep doo')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node.data).to eq('doo')
+      expect(@jb.list.head.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo')
+    end
+
+    it 'prepends 3 beats at once' do
+      @jb.prepend('deep doo ditt')
+      expect(@jb.list.head.data).to eq('deep')
+      expect(@jb.list.head.next_node.data).to eq('doo')
+      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
+      expect(@jb.list.head.next_node.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo ditt')
+    end
+
+    it 'prepends 1 beat 2 times' do
+      @jb.prepend('deep')
+      @jb.prepend('doo')
+      expect(@jb.all).to eq('doo deep')
+    end
+
+    it 'prepends 1 beat 3 times' do
+      @jb.prepend('deep')
+      @jb.prepend('doo')
+      @jb.prepend('ditt')
+      expect(@jb.all).to eq('ditt doo deep')
+    end
+
+    it 'prepends an additional 3 beats' do
+      @jb.prepend('deep doo ditt')
+      @jb.prepend('woo hoo shu')
+      expect(@jb.all).to eq('woo hoo shu deep doo ditt')
+    end
+  end
 end
