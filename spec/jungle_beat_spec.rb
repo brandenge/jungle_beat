@@ -30,29 +30,23 @@ RSpec.describe JungleBeat do
   describe '#append' do
     it 'appends 1 beat at once' do
       @jb.append('deep')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep')
     end
 
     it 'appends 2 beats at once' do
       @jb.append('deep doo')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node).to eq(nil)
+      expect(@jb.all).to eq('deep doo')
     end
 
     it 'appends 3 beats at once' do
       @jb.append('deep doo ditt')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
-      expect(@jb.list.to_string).to eq('deep doo ditt')
+      expect(@jb.all).to eq('deep doo ditt')
     end
 
     it 'appends an additional 3 beats' do
       @jb.append('deep doo ditt')
       @jb.append('woo hoo shu')
-      expect(@jb.list.to_string).to eq('deep doo ditt woo hoo shu')
+      expect(@jb.all).to eq('deep doo ditt woo hoo shu')
     end
   end
 
@@ -117,18 +111,11 @@ RSpec.describe JungleBeat do
 
     it 'prepends 2 beats at once' do
       @jb.prepend('deep doo')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node).to eq(nil)
       expect(@jb.all).to eq('deep doo')
     end
 
     it 'prepends 3 beats at once' do
       @jb.prepend('deep doo ditt')
-      expect(@jb.list.head.data).to eq('deep')
-      expect(@jb.list.head.next_node.data).to eq('doo')
-      expect(@jb.list.head.next_node.next_node.data).to eq('ditt')
-      expect(@jb.list.head.next_node.next_node.next_node).to eq(nil)
       expect(@jb.all).to eq('deep doo ditt')
     end
 
