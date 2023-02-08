@@ -190,38 +190,39 @@ RSpec.describe LinkedList do
       @linked_list.append(data_1)
       @linked_list.append(data_2)
       @linked_list.append(data_3)
-      @linked_list.append(data_4)
     end
 
     it 'removes 1 element' do
       @linked_list.pop
-      expect(@linked_list.to_string)
-      .to eq("#{data_1} #{data_2} #{data_3}")
+      expect(@linked_list.to_string).to eq("#{data_1} #{data_2}")
     end
 
     it 'returns the popped node' do
       expect(@linked_list.pop).to be_a(Node)
     end
 
-    it 'removes 2 element' do
-      @linked_list.pop
-      @linked_list.pop
-      expect(@linked_list.to_string).to eq("#{data_1} #{data_2}")
-    end
-
-    it 'removes 3 element' do
-      @linked_list.pop
+    it 'removes 2 elements' do
       @linked_list.pop
       @linked_list.pop
       expect(@linked_list.to_string).to eq("#{data_1}")
     end
 
-    it 'does nothing when used on an empty linked list' do
+    it 'resets the head to nil when removing the last node' do
+      @linked_list.pop
+      @linked_list.pop
+      @linked_list.pop
+      expect(@linked_list.to_string).to eq('')
+      expect(@linked_list.head).to eq(nil)
+    end
+
+    it 'does nothing when used on an already empty linked list' do
       linked_list = LinkedList.new
       expect(linked_list.to_string).to eq('')
+      expect(linked_list.head).to eq(nil)
 
       linked_list.pop
       expect(linked_list.to_string).to eq('')
+      expect(linked_list.head).to eq(nil)
     end
   end
 end
