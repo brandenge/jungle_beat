@@ -25,6 +25,11 @@ RSpec.describe JungleBeat do
     it 'initializes @voice' do
       expect(@jb.voice).to eq('Boing')
     end
+
+    it 'accepts an argument and appends the string of beats to the list' do
+      jb = JungleBeat.new('deep dop dop deep')
+      expect(jb.all).to eq('deep dop dop deep')
+    end
   end
 
   describe '#append' do
