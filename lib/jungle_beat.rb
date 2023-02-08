@@ -11,8 +11,9 @@ class JungleBeat
   attr_reader :list
   attr_accessor :rate, :voice
 
-  def initialize
+  def initialize(beats = nil)
     @list = LinkedList.new
+    append(beats) if beats
     @rate = DEFAULTS[:rate]
     @voice = DEFAULTS[:voice]
   end
