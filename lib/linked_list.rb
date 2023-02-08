@@ -94,6 +94,7 @@ class LinkedList
 
   def pop
     current = @head
+    @head = nil if @head&.next_node == nil
     popped_node = nil
     while current&.next_node&.next_node != nil
       current = current.next_node

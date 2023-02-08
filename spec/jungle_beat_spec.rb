@@ -19,7 +19,7 @@ RSpec.describe JungleBeat do
     end
 
     it 'initializes @rate' do
-      expect(@jb.rate).to eq(500)
+      expect(@jb.rate).to eq(JungleBeat::DEFAULTS[:rate])
     end
 
     it 'initializes @voice' do
@@ -140,6 +140,10 @@ RSpec.describe JungleBeat do
   end
 
   describe '#reset_rate' do
+    it 'returns the default value' do
+      expect(@jb.reset_rate).to eq(JungleBeat::DEFAULTS[:rate])
+    end
+
     it 'resets the rate' do
       @jb.rate = 100
       expect(@jb.rate).to eq(100)
@@ -167,6 +171,10 @@ RSpec.describe JungleBeat do
   end
 
   describe '#reset_voice' do
+    it 'returns the default value' do
+      expect(@jb.reset_voice).to eq(JungleBeat::DEFAULTS[:voice])
+    end
+
     it 'resets the voice' do
       @jb.voice = 'Daniel'
       expect(@jb.voice).to eq('Daniel')

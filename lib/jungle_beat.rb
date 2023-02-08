@@ -20,9 +20,7 @@ class JungleBeat
   def append(string_data)
     data_array = string_data.split
     data_array = data_array.filter{ |data| BEATS.include?(data) }
-    data_array.each do |data|
-      @list.append(data)
-    end
+    data_array.each{ |data| @list.append(data) }
     data_array.count
   end
 
@@ -50,9 +48,7 @@ class JungleBeat
   def prepend(string_data)
     data_array = string_data.split
     data_array = data_array.filter{ |data| BEATS.include?(data) }.reverse
-    data_array.each do |data|
-      @list.prepend(data)
-    end
+    data_array.each{ |data| @list.prepend(data) }
     data_array.count
   end
 
